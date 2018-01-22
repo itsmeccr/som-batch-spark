@@ -95,8 +95,6 @@ class SOM:
                     part_sum_denominator = np.array(np.zeros([x_size, y_size, 1]))
                     for row_t in partition_rows:
                         bmu, bmu_idx = find_bmu(row_t['features'], partition_net)
-                        print("X size = ", x_size)
-                        print("Y size = ", y_size)
                         for x in range(x_size):
                             for y in range(y_size):
                                 w_dist = np.sum((np.array([x, y]) - bmu_idx) ** 2)
@@ -104,9 +102,6 @@ class SOM:
                                 if w_dist <= radius ** 2:
                                     # update weight vectors wk using Eq. (3)
                                     influence = calculate_influence(w_dist, radius)
-                                    print("Shape of sum_deno ",np.shape(part_sum_denominator))
-                                    print("X val = ", x)
-                                    print("Y val = ", y)
                                     part_sum_denominator[x, y, :] = part_sum_denominator[x, y, :] + influence
                                     new_w = influence * row_t['features']
                                     part_sum_numerator[x, y, :] = part_sum_numerator[x, y, :] + new_w
